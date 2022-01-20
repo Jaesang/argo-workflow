@@ -7,7 +7,7 @@ spec:
   entrypoint: main
   arguments:
     parameters:
-    - name: contract_ids
+    - name: contract_id
       value: "contract_uuid"
   templates:
   - name: createContractRepo
@@ -15,7 +15,7 @@ spec:
     container:
       name: 'createRepo'
       image: ghcr.io/sktelecom/ghcli-alpine:2.0.0
-      imagePullPolicy: IfNotPresen
+      imagePullPolicy: IfNotPresent
       command:
       - /bin/bash
       - -ecx
