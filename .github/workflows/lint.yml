@@ -48,6 +48,9 @@ jobs:
 
           # Test installation
           argo version
+      - name: Install yq
+        run: |
+          wget https://github.com/mikefarah/yq/releases/download/v4.16.2/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/bin/yq
 
       # Runs a Lint command
       - name: Lint changed file
@@ -58,5 +61,6 @@ jobs:
 
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Lint $file"
-            argo template lint $file
+            cat $file |yq e '.kind'
+            # argo template lint $file
           done
