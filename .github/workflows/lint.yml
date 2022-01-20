@@ -53,6 +53,9 @@ jobs:
       - name: Lint changed file
         run: |
           KUBECONFIG=/dev/null
+          ARGO_NAMESPACE=argo
+          ARGO_TOKEN='Bearer ******' ;# Should always start with "Bearer " or "Basic ".
+
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Lint $file"
             argo template lint $file
