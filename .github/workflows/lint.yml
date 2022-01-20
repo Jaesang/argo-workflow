@@ -55,3 +55,4 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Lint $file"
             argo template lint $file
+          done
