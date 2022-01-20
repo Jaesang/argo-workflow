@@ -59,9 +59,4 @@ jobs:
           ARGO_NAMESPACE=argo
           ARGO_TOKEN='Bearer ******' ;# Should always start with "Bearer " or "Basic ".
 
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "Lint $file"
-            kind=$(yq e '.kind' $file || true)
-            echo $kind
-            # argo template lint $file
-          done
+          argo template lint *
