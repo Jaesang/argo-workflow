@@ -61,7 +61,7 @@ jobs:
 
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Lint $file"
-            kind=$(cat $file |yq e '.kind' -)
+            kind=$(yq e '.kind' $file)
             echo $kind
             # argo template lint $file
           done
