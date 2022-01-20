@@ -50,7 +50,7 @@ jobs:
           argo version
       - name: Install yq
         run: |
-          wget https://github.com/mikefarah/yq/releases/download/v4.16.2/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/bin/yq
+          wget https://github.com/mikefarah/yq/releases/download/v4.16.2/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/local/bin/yq
 
       # Runs a Lint command
       - name: Lint changed file
