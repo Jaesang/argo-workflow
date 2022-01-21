@@ -87,4 +87,4 @@ jobs:
           ARGO_NAMESPACE=argo
           ARGO_TOKEN='Bearer ******' ;# Should always start with "Bearer " or "Basic ".
 
-          argo template lint *
+          argo template lint * --kubeconfig /tmp/fakekubeconfig -v 
