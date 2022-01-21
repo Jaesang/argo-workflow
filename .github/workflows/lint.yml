@@ -78,6 +78,7 @@ jobs:
               username: dummy
               password: dummy
           EOF
+          cat /tmp/fakekubeconfig
           
       # Runs a Lint command
       - name: Lint changed file
