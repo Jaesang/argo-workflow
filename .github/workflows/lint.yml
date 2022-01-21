@@ -48,14 +48,41 @@ jobs:
 
           # Test installation
           argo version
+
+      # Install yq binary
       - name: Install yq
         run: |
           wget https://github.com/mikefarah/yq/releases/download/v4.16.2/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/local/bin/yq
 
+      # Make fake kubeconfig for executing argo cli
+      - name: Make fake kubeconfig
+        run: |
+          cat <<EOF > /tmp/fakekubeconfig
+          apiVersion: v1
+          kind: Config
+          clusters:
+          - cluster:
+              certificate-authority-data: ZHVtbXkK
+              server: https://localhost:6443
+            name: dummy
+          contexts:
+          - context:
+              cluster: dummy
+              user: dummy
+            name: dummy
+          current-context: dummy
+          preferences: {}
+          users:
+          - name: dummy
+            user:
+              username: dummy
+              password: dummy
+          EOF
+          
       # Runs a Lint command
       - name: Lint changed file
         run: |
-          KUBECONFIG=/dev/null
+          KUBECONFIG=/tmp/fakekubeconfig
           ARGO_NAMESPACE=argo
           ARGO_TOKEN='Bearer ******' ;# Should always start with "Bearer " or "Basic ".
 
