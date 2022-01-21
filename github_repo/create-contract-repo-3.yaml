@@ -59,7 +59,7 @@ spec:
             name: "github-tks-mgmt-token"
       env:
         - name: CONTRACT_ID
-          value: "{{workflow.parameters.contract_ids}}"
+          value: "{{workflow.parameters.contract_id}}"
 
   - name: main
     steps:
