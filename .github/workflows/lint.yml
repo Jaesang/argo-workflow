@@ -26,11 +26,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
-
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v13.1
-
+          
       # Runs a set of commands using the runners shell
       - name: Install Argo CLI
         run: |
@@ -48,11 +44,6 @@ jobs:
 
           # Test installation
           argo version
-
-      # Install yq binary
-      - name: Install yq
-        run: |
-          wget https://github.com/mikefarah/yq/releases/download/v4.16.2/yq_linux_amd64.tar.gz -O - | tar xz && mv yq_linux_amd64 /usr/local/bin/yq
 
       # Make fake kubeconfig for executing argo cli
       - name: Make fake kubeconfig
@@ -83,8 +74,4 @@ jobs:
       # Runs a Lint command
       - name: Lint changed file
         run: |
-          KUBECONFIG=/tmp/fakekubeconfig
-          ARGO_NAMESPACE=argo
-          ARGO_TOKEN='Bearer ******' ;# Should always start with "Bearer " or "Basic ".
-
-          argo template lint * --kubeconfig /tmp/fakekubeconfig -v 
+          argo template lint * --kubeconfig /tmp/fakekubeconfig
